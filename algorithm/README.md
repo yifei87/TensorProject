@@ -31,3 +31,37 @@ https://github.com/aymericdamien/TensorFlow-Examples
 	- DCGAN (Deep Convolutional Generative Adversarial Networks)
 
 ---
+
+算法
+
+- 机器学习
+	- 线性回归
+	- 逻辑回归
+	- 随机森林
+	- SVM
+	- 基因算法
+- 神经网络
+	- NN
+	- DNN
+	- CNN
+	- RNN
+	- FCN
+	- RFCN
+	- rcnn
+	- fast rcnn
+	- faster rcnn
+	- mask rcnn
+	- Lenet
+	- Alexnet
+	- Googlenet( inception )
+	- ResNet
+	- VGG
+	- Densenet
+	- Capsule Network（CapsNet）
+	- MobileNet
+	- SSD
+	- YOLO
+	- RetinaNet
+	- darknet
+	- facenet
+	- GAN
