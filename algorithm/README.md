@@ -40,6 +40,9 @@ https://github.com/aymericdamien/TensorFlow-Examples
 	- 随机森林
 	- SVM
 	- 基因算法
+	- K-均值
+	- KNN
+
 - 神经网络
 	- NN
 	- DNN
@@ -65,3 +68,4 @@ https://github.com/aymericdamien/TensorFlow-Examples
 	- darknet
 	- facenet
 	- GAN
+	- 迁移学习
