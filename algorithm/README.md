@@ -31,6 +31,62 @@ https://github.com/aymericdamien/TensorFlow-Examples
 	- DCGAN (Deep Convolutional Generative Adversarial Networks)
 
 ---
+https://github.com/Hvass-Labs/TensorFlow-Tutorials
+
+
+Simple Linear Model (Notebook)
+
+Convolutional Neural Network (Notebook)
+
+Pretty Tensor (Notebook)
+
+3-B. Layers API (Notebook)
+
+3-C. Keras API (Notebook)
+
+Save & Restore (Notebook)
+
+Ensemble Learning (Notebook)
+
+CIFAR-10 (Notebook)
+
+Inception Model (Notebook)
+
+Transfer Learning (Notebook)
+
+Video Data (Notebook)
+
+Fine-Tuning (Notebook)
+
+Adversarial Examples (Notebook)
+
+Adversarial Noise for MNIST (Notebook)
+
+Visual Analysis (Notebook)
+
+13-B. Visual Analysis for MNIST (Notebook)
+
+DeepDream (Notebook)
+
+Style Transfer (Notebook)
+
+Reinforcement Learning (Notebook)
+
+Estimator API (Notebook)
+
+TFRecords & Dataset API (Notebook)
+
+Hyper-Parameter Optimization (Notebook)
+
+Natural Language Processing (Notebook)
+
+Machine Translation (Notebook)
+
+Image Captioning (Notebook)
+
+Time-Series Prediction (Notebook)
+
+---
 
 算法
 
