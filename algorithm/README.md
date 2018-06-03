@@ -66,7 +66,7 @@ https://github.com/Hvass-Labs/TensorFlow-Tutorials
 
 ---
 
-算法
+# 算法
 
 - 机器学习
 	- 线性回归
@@ -78,28 +78,35 @@ https://github.com/Hvass-Labs/TensorFlow-Tutorials
 	- KNN
 
 - 神经网络
-	- NN
 	- DNN
 	- CNN
 	- RNN
-	- FCN
-	- RFCN
-	- rcnn
-	- fast rcnn
-	- faster rcnn
-	- mask rcnn
-	- Lenet
-	- Alexnet
-	- Googlenet( inception )
-	- ResNet
-	- VGG
-	- Densenet
-	- Capsule Network（CapsNet）
-	- MobileNet
-	- SSD
-	- YOLO
-	- RetinaNet
-	- darknet
-	- facenet
-	- GAN
-	- 迁移学习
+
+# 常用网络模型
+
+- Lenet
+- Alexnet
+- VGG
+- 编码器（自编码）
+- Googlenet( inception )
+- ResNet
+- Densenet
+- Capsule Network（CapsNet）
+- GAN
+- MobileNet
+- 迁移学习
+
+
+# 目标检测算法
+
+- FCN
+- RFCN
+- rcnn
+- fast rcnn
+- faster rcnn
+- mask rcnn
+- SSD
+- YOLO
+- RetinaNet
+- darknet
+- facenet

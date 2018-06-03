@@ -10,7 +10,7 @@
 | [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tensorflow.org/api_docs/) |
 
 # TensorProject
-some project practice with tensorflow 
+some project practice with [tensorflow](https://tensorflow.google.cn/)
 
 
 # tensorflow 教程
