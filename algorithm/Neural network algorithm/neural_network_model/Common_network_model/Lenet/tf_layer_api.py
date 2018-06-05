@@ -82,7 +82,7 @@ Y = tf.placeholder('float')
 def train_neural_network(X, Y):
     # '''
     predict = convolutional_neural_network(X)
-    cost_func = tf.reduce_mean(tf.nn.tf.nn.softmax_cross_entropy_with_logits_v2(logits=predict, labels=Y))
+    cost_func = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=predict, labels=Y))
     optimizer = tf.train.AdamOptimizer().minimize(cost_func)  # learning rate 默认 0.001
     correct = tf.equal(tf.argmax(predict, 1), tf.argmax(Y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
