@@ -1,5 +1,6 @@
 - [DenseNet算法详解](https://blog.csdn.net/u014380165/article/details/75142664)
 - [DenseNet](https://github.com/liuzhuang13/DenseNet)
+- https://github.com/taki0112/Densenet-Tensorflow/
 
 
 先列下DenseNet的几个优点，感受下它的强大：
@@ -7,6 +8,9 @@
 - 2、加强了feature的传递
 - 3、更有效地利用了feature
 - 4、一定程度上较少了参数数量
+- 注：每个conv对应的顺序为 BN-Relu-conv(一般为conv-BN-Relu or conv-Relu-BN(dropout))
+
+
 
 那就是在保证网络中层与层之间最大程度的信息传输的前提下，直接将所有层连接起来！
 
