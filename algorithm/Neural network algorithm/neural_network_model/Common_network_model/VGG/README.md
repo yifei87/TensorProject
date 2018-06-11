@@ -10,7 +10,7 @@ https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/slim/pyt
 
 ![这里写图片描述](https://img-blog.csdn.net/20170222093054201?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2N5MTIzNDExODk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
-'''
+```
 VGG是在从Alex-net发展而来的网络。主要修改一下两个方面：
 1，在第一个卷基层层使用更小的filter尺寸和间隔（3*3）； 2，在整个图片和multi-scale上训练和测试图片。
 3*3 filter:
@@ -23,4 +23,4 @@ VGG是在从Alex-net发展而来的网络。主要修改一下两个方面：
 7*7*C=49C2个参数，而3个3x3的卷积层的组合仅有个3*（3*3*C）=27C2个参数。直观说来，最好选择带有小滤波器的卷积层组合，而不是用一个带有大的滤波器的卷积层。前者可以表达出输入数据中更多个强力特征，
 使用的参数也更少。唯一的不足是，在进行反向传播时，中间的卷积层可能会导致占用更多的内存。
 1*1 filter: 作用是在不影响输入输出维数的情况下，对输入线进行线性形变，然后通过Relu进行非线性处理，增加网络的非线性表达能力。 Pooling：2*2，间隔s=2。
-'''
+```
