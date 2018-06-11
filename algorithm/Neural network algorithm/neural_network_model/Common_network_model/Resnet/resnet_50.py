@@ -52,15 +52,12 @@ def resnet_50(x):
     for index,b in enumerate(block_nmu):
         for i in range(b):
             net=resnet_block(net,'block%s_%s'%(index+1,i+1),outputs[index]) # [56,56,256]
-        if index==0:
-            stride=1
+        if index==len(block_nmu)-1:
+            # 最后一个average pool
+            net = tf.layers.average_pooling2d(net, 7, 2, 'valid', name='average_pool')
+            # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
         else:
-            stride=2
-        net=tf.layers.max_pooling2d(net,2,stride,'same',name='block%s_pool'%(index+1))
-
-    # 最后一个average pool
-    net=tf.layers.average_pooling2d(net,7,2,'valid',name='average_pool')
-    # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
+            net=tf.layers.max_pooling2d(net,2,2,'same',name='block%s_pool'%(index+1))
 
     # conv 代替fc
     net = tf.layers.conv2d(net, num_classes, 1,1,'SAME', activation=None,name='logits')
@@ -84,15 +81,13 @@ def resnet_101(x):
     for index,b in enumerate(block_nmu):
         for i in range(b):
             net=resnet_block(net,'block%s_%s'%(index+1,i+1),outputs[index]) # [56,56,256]
-        if index==0:
-            stride=1
+        if index==len(block_nmu)-1:
+            # 最后一个average pool
+            net = tf.layers.average_pooling2d(net, 7, 2, 'valid', name='average_pool')
+            # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
         else:
-            stride=2
-        net=tf.layers.max_pooling2d(net,2,stride,'same',name='block%s_pool'%(index+1))
+            net=tf.layers.max_pooling2d(net,2,2,'same',name='block%s_pool'%(index+1))
 
-    # 最后一个average pool
-    net=tf.layers.average_pooling2d(net,7,2,'valid',name='average_pool')
-    # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
 
     # conv 代替fc
     net = tf.layers.conv2d(net, num_classes, 1,1,'SAME', activation=None,name='logits')
@@ -114,15 +109,12 @@ def resnet_152(x):
     for index,b in enumerate(block_nmu):
         for i in range(b):
             net=resnet_block(net,'block%s_%s'%(index+1,i+1),outputs[index]) # [56,56,256]
-        if index==0:
-            stride=1
+        if index==len(block_nmu)-1:
+            # 最后一个average pool
+            net = tf.layers.average_pooling2d(net, 7, 2, 'valid', name='average_pool')
+            # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
         else:
-            stride=2
-        net=tf.layers.max_pooling2d(net,2,stride,'same',name='block%s_pool'%(index+1))
-
-    # 最后一个average pool
-    net=tf.layers.average_pooling2d(net,7,2,'valid',name='average_pool')
-    # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
+            net=tf.layers.max_pooling2d(net,2,2,'same',name='block%s_pool'%(index+1))
 
     # conv 代替fc
     net = tf.layers.conv2d(net, num_classes, 1,1,'SAME', activation=None,name='logits')
