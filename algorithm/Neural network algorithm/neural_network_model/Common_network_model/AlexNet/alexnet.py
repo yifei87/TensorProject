@@ -49,7 +49,7 @@ def alexnet_v2_arg_scope(weight_decay=0.0005):
         return arg_sc
 
 
-def alexnet_v2(inputs,
+def alexnet_v2(inputs, # [n,224,224,3]
                num_classes=1000,
                is_training=True,
                dropout_keep_prob=0.5,
@@ -91,30 +91,30 @@ def alexnet_v2(inputs,
     # Collect outputs for conv2d, fully_connected and max_pool2d.
     with slim.arg_scope([slim.conv2d, slim.fully_connected, slim.max_pool2d],
                         outputs_collections=[end_points_collection]):
-      net = slim.conv2d(inputs, 64, [11, 11], 4, padding='VALID',
+      net = slim.conv2d(inputs, 64, [11, 11], 4, padding='VALID', # [n,54,54,64]
                         scope='conv1')
-      net = slim.max_pool2d(net, [3, 3], 2, scope='pool1')
-      net = slim.conv2d(net, 192, [5, 5], scope='conv2')
-      net = slim.max_pool2d(net, [3, 3], 2, scope='pool2')
-      net = slim.conv2d(net, 384, [3, 3], scope='conv3')
-      net = slim.conv2d(net, 384, [3, 3], scope='conv4')
-      net = slim.conv2d(net, 256, [3, 3], scope='conv5')
-      net = slim.max_pool2d(net, [3, 3], 2, scope='pool5')
+      net = slim.max_pool2d(net, [3, 3], 2, scope='pool1') # [n,26,26,64]
+      net = slim.conv2d(net, 192, [5, 5], scope='conv2') # [n,26,26,192]
+      net = slim.max_pool2d(net, [3, 3], 2, scope='pool2') # [n,12,12,192]
+      net = slim.conv2d(net, 384, [3, 3], scope='conv3') # [n,12,12,384]
+      net = slim.conv2d(net, 384, [3, 3], scope='conv4') # [n,12,12,384]
+      net = slim.conv2d(net, 256, [3, 3], scope='conv5') # [n,12,12,256]
+      net = slim.max_pool2d(net, [3, 3], 2, scope='pool5') # [n,5,5,256]
 
       # Use conv2d instead of fully_connected layers.
       with slim.arg_scope([slim.conv2d],
                           weights_initializer=trunc_normal(0.005),
                           biases_initializer=tf.constant_initializer(0.1)):
-        net = slim.conv2d(net, 4096, [5, 5], padding='VALID',
+        net = slim.conv2d(net, 4096, [5, 5], padding='VALID', # [n,1,1,4096]
                           scope='fc6')
         net = slim.dropout(net, dropout_keep_prob, is_training=is_training,
                            scope='dropout6')
-        net = slim.conv2d(net, 4096, [1, 1], scope='fc7')
+        net = slim.conv2d(net, 4096, [1, 1], scope='fc7') # [n,1,1,4096]
         # Convert end_points_collection into a end_point dict.
         end_points = slim.utils.convert_collection_to_dict(
             end_points_collection)
         if global_pool:
-          net = tf.reduce_mean(net, [1, 2], keep_dims=True, name='global_pool')
+          net = tf.reduce_mean(net, [1, 2], keep_dims=True, name='global_pool') # [n,1,1,4096]
           end_points['global_pool'] = net
         if num_classes:
           net = slim.dropout(net, dropout_keep_prob, is_training=is_training,
@@ -123,9 +123,9 @@ def alexnet_v2(inputs,
                             activation_fn=None,
                             normalizer_fn=None,
                             biases_initializer=tf.zeros_initializer(),
-                            scope='fc8')
+                            scope='fc8') # [n,1,1,10]
           if spatial_squeeze:
-            net = tf.squeeze(net, [1, 2], name='fc8/squeezed')
+            net = tf.squeeze(net, [1, 2], name='fc8/squeezed') # [n,10]
           end_points[sc.name + '/fc8'] = net
       return net, end_points
 alexnet_v2.default_image_size = 224
