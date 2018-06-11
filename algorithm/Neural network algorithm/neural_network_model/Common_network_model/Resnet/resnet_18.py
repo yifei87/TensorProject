@@ -13,7 +13,7 @@ num_classes=1000
 def resnet_block(net,scope='block_0',outputs=64,activation_fn=tf.nn.relu):
     with tf.variable_scope(scope):
         net1=net
-        net1=tf.layers.conv2d(net1,outputs,1,1,'same',activation=None,name='conv1')
+        net1=tf.layers.conv2d(net1,outputs,3,1,'same',activation=None,name='conv1')
         net1 = tf.layers.batch_normalization(net1,name='BN1')
         net1=activation_fn(net1,name='relu1')
 
@@ -21,9 +21,6 @@ def resnet_block(net,scope='block_0',outputs=64,activation_fn=tf.nn.relu):
         net1 = tf.layers.batch_normalization(net1, name='BN2')
         net1 = activation_fn(net1, name='relu2')
 
-        net1 = tf.layers.conv2d(net1, outputs*4, 1, 1, 'same', activation=None, name='conv3')
-        net1 = tf.layers.batch_normalization(net1, name='BN3')
-        net1 = activation_fn(net1, name='relu3')
 
         if net.shape[-1]==net1.shape[-1]:
             net = tf.add(net, net1, name='add')
@@ -40,8 +37,8 @@ def resnet_block(net,scope='block_0',outputs=64,activation_fn=tf.nn.relu):
         return net
 
 
-def resnet_50(x):
-    block_nmu = [3, 4, 6, 3]
+def resnet_18(x):
+    block_nmu = [2, 2, 2, 2] # （2+2+2+2）×2+2=18
     outputs = [64, 128, 256, 512]
     net=x
     net=tf.layers.batch_normalization(net,name='BN0')
@@ -70,10 +67,10 @@ def resnet_50(x):
 
     return net
 
-pred=resnet_50(x)
+pred=resnet_18(x)
 
-def resnet_101(x):
-    block_nmu = [3, 4, 23, 3]
+def resnet_34(x):
+    block_nmu = [3, 4, 6, 3] # （3+4+6+3）×2+2=34
     outputs = [64, 128, 256, 512]
     net=x
     net=tf.layers.batch_normalization(net,name='BN0')
@@ -102,32 +99,3 @@ def resnet_101(x):
 
     return net
 
-def resnet_152(x):
-    block_nmu = [3, 8, 36, 3]
-    outputs = [64, 128, 256, 512]
-    net=x
-    net=tf.layers.batch_normalization(net,name='BN0')
-    net=tf.layers.conv2d(net,64,(7,7),2,'SAME',activation=None,name='conv1') # [112,112,64]
-    net = tf.layers.batch_normalization(net,name='BN1')
-    net=tf.nn.relu(net,name='relu1')
-    net=tf.layers.max_pooling2d(net,(3,3),2,'same',name='pool1') # [56,56,64]
-    for index,b in enumerate(block_nmu):
-        for i in range(b):
-            net=resnet_block(net,'block%s_%s'%(index+1,i+1),outputs[index]) # [56,56,256]
-        if index==0:
-            stride=1
-        else:
-            stride=2
-        net=tf.layers.max_pooling2d(net,2,stride,'same',name='block%s_pool'%(index+1))
-
-    # 最后一个average pool
-    net=tf.layers.average_pooling2d(net,7,2,'valid',name='average_pool')
-    # net = tf.reduce_mean(net, [1, 2], name='pool5', keep_dims=True)
-
-    # conv 代替fc
-    net = tf.layers.conv2d(net, num_classes, 1,1,'SAME', activation=None,name='logits')
-    net = tf.squeeze(net, [1, 2], name='SpatialSqueeze')
-
-    net=tf.nn.softmax(net, name='predictions')
-
-    return net
