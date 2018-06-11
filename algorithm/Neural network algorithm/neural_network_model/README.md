@@ -1,3 +1,7 @@
+# tensorflow 实现的常用算法模型
+- https://github.com/tensorflow/models/tree/master/research/slim/nets
+
+
 # 常用网络模型
 
 - Lenet
