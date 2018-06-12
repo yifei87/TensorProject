@@ -55,10 +55,10 @@ def Inception_V1(x,softmax0=False,softmax1=False):
     net = inception_block(net, filters, 'block_4a')  # [14,14,512]
 
     if softmax0:
-        net1=tf.layers.average_pooling2d(net,5,3,'valid',name='softmax0_pool_5_5_v3') # [4,4,512]
-        net1=tf.layers.conv2d(net1,1024,1,1,'same',activation=tf.nn.relu,name='softmax0_conv_1_1_s1') # [4,4,1024]
+        net1=tf.layers.average_pooling2d(net,14,1,'valid',name='softmax0_pool_14_14_v1') # [1,1,512]
+        net1=tf.layers.conv2d(net1,1024,1,1,'same',activation=tf.nn.relu,name='softmax0_conv_1_1_s1') # [1,1,1024]
         net1=tf.layers.dropout(net1,0.4)
-        net1=tf.layers.flatten(net1) # [-1,4*4*1024]
+        net1=tf.layers.flatten(net1) # [-1,1*1*1024]
         net1 = tf.layers.dense(net1, 1024, activation=tf.nn.relu, name='softmax0_fc_1')  # [-1,2048]
         net1 = tf.layers.dense(net1, num_classes, activation=tf.nn.softmax, name='softmax0_output_1')  # [-1,1000]
         return net1
@@ -69,11 +69,12 @@ def Inception_V1(x,softmax0=False,softmax1=False):
     net = inception_block(net, filters, 'block_4c')  # [14,14,512]
     filters = [112, 144, 288, 32, 64, 64]
     net = inception_block(net, filters, 'block_4d')  # [14,14,528]
+
     if softmax1:
-        net1=tf.layers.average_pooling2d(net,5,3,'valid',name='softmax1_pool_5_5_v3') # [4,4,528]
-        net1=tf.layers.conv2d(net1,1024,1,1,'same',activation=tf.nn.relu,name='softmax1_conv_1_1_s1') # [4,4,1024]
+        net1=tf.layers.average_pooling2d(net,14,1,'valid',name='softmax1_pool_14_14_v1') # [1,1,528]
+        net1=tf.layers.conv2d(net1,1024,1,1,'same',activation=tf.nn.relu,name='softmax1_conv_1_1_s1') # [1,1,1024]
         net1 = tf.layers.dropout(net1, 0.4)
-        net1=tf.layers.flatten(net1) # [-1,4*4*1024]
+        net1=tf.layers.flatten(net1) # [-1,1*1*1024]
         net1=tf.layers.dense(net1,1024,activation=tf.nn.relu,name='softmax1_fc_1') # [-1,2048]
         net1 = tf.layers.dense(net1, num_classes, activation=tf.nn.softmax, name='softmax1_output_1') # [-1,1000]
         return net1
