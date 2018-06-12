@@ -30,4 +30,16 @@ Inception v3的亮点总结如下：
 ![](https://img-blog.csdn.net/20170425211014876?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZGlhbW9uam95X3pvbmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 
+大卷积核完全可以由一系列的3x3卷积核来替代，那能不能分解的更小一点呢。
+
+文章考虑了 nx1
+ 卷积核，如下图所示的取代3x3卷积：
+
+于是，任意nxn的卷积都可以通过1xn卷积后接nx1卷积来替代。实际上，作者发现在网络的前期使用这种分解效果
+
+并不好，还有在中度大小的feature map上使用效果才会更好，对于mxm大小的feature
+ map,建议m在12到20之间。
+
+用nx1卷积来代替大卷积核，这里设定n=7来应对17x17大小的feature
+ map。该结构被正式用在GoogLeNet V2中。
 ![](https://img-blog.csdn.net/20180123155323780?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG92ZWxpdXp6/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
