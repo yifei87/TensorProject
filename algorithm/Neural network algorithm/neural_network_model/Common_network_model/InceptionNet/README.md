@@ -1,5 +1,6 @@
 - [Feature Extractor[Inception v4]](https://www.cnblogs.com/shouhuxianjian/p/7786760.html)
 - [从Inception v1,v2,v3,v4,RexNeXt到Xception再到MobileNets,ShuffleNet,MobileNetV2](https://blog.csdn.net/qq_14845119/article/details/73648100)
+- [tensorflow model](https://github.com/tensorflow/models/tree/master/research/slim/nets)
 
 在下面的网络结构图中：所有后面不带V的卷积，用的都是same-padded，也就是输出的网格大小等于输入网格的大小（如vgg的卷积一样）；带V的使用的是valid-padded，表示输出的网格尺寸是会逐步减小的（如lenet5的卷积一样）。
 
